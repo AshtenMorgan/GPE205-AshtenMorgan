@@ -3,7 +3,9 @@ guid: 0fd09ffa418666448829270d01f41f39
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - playerControllerPrefab: {fileID: 8551497393839507865, guid: 8dd269f8b78143f4f8932cd0fdff39d9, type: 3}
+  - tankPawnPrefab: {fileID: 725118879205093727, guid: cb97472ff74d9a345a040bf2994c1fdc, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
