@@ -2,22 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TankShooter : MonoBehaviour
+public class TankShooter : Shooter
 {
     public Transform firepointTransform;
     public GameObject shellProjectile;
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
         
     }
 
     // Update is called once per frame
-    void Update()
+    public override void Update()
     {
         
     }
-    public void Shoot(GameObject shellProjectile, float fireForce, float damageDone, float lifespan)
+    public override void Shoot(GameObject shellProjectile, float fireForce, float damageDone, float lifespan)
     {
         GameObject newShell = Instantiate(shellProjectile, firepointTransform.position, firepointTransform.rotation) as GameObject;
         DamageOnHit damageOnHit = newShell.GetComponent<DamageOnHit>();

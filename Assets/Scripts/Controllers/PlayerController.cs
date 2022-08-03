@@ -10,6 +10,9 @@ public class PlayerController : MasterController
     public KeyCode rotateClockwiseKey;
     public KeyCode rotateCounterClockwiseKey;
     public KeyCode shootKey;
+    public KeyCode boostKey;
+
+    public bool isBoosting;
 
     // Start is called before the first frame update
     public override void Start()
@@ -66,6 +69,18 @@ public class PlayerController : MasterController
         if (Input.GetKeyDown(shootKey))
         {
             pawn.Shoot();
+        }
+        if (Input.GetKeyDown(boostKey))
+        {
+            isBoosting = true;
+        }
+        if (Input.GetKeyUp(boostKey))
+        {
+            isBoosting = false;
+        }
+        while (isBoosting == true)
+        {
+            pawn.Boost();
         }
     }
 }

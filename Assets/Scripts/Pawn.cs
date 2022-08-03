@@ -28,6 +28,7 @@ public abstract class Pawn : MonoBehaviour
     {
         mover = GetComponent<Mover>();
         shooter = GetComponent<Shooter>();
+        fireRate = 1 / fireRate;
     }
 
     // Update is called once per frame
@@ -41,6 +42,6 @@ public abstract class Pawn : MonoBehaviour
     public abstract void RotateClockwise();
     public abstract void RotateCounterClockwise();
     public abstract void Shoot();
-
+    public abstract void Boost();
 };
 

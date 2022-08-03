@@ -7,6 +7,7 @@ public class TankPawn : Pawn
     // Start called before first frame update
     public override void Start()
     {
+        nextShotDelay = 0;
         base.Start();
     }
 
@@ -15,6 +16,8 @@ public class TankPawn : Pawn
     {
         // Calls Start from parent class Pawn
         base.Start();
+        nextShotDelay -= Time.deltaTime;
+        nextShotDelay = Mathf.Clamp(nextShotDelay, 0, shotCooldown);
     }
     // LIST OF MOVEMENTS FOR TANK PAWN
     public override void MoveForward()
@@ -33,8 +36,24 @@ public class TankPawn : Pawn
     {
         mover.Rotate(-turnSpeed);
     }
+    public override void Boost()
+    {
+        mover.Move(transform.forward, moveSpeed * 2);
+    }
+    public float shotCooldown = 1.0f;
+    private float nextShotDelay;
     public override void Shoot()
     {
-        shooter.Shoot(shellProjectile, fireForce, damageDone, shellLifespan);
+        if (nextShotDelay <= 0)
+        {
+            shooter.Shoot(shellProjectile, fireForce, damageDone, shellLifespan);
+            nextShotDelay = shotCooldown;
+        }
+        else if (nextShotDelay > 0)
+        {
+            Debug.Log("You can't shoot yet!");
+
+        }
+
     }
 }
