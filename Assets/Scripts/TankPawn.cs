@@ -16,7 +16,7 @@ public class TankPawn : Pawn
         // Calls Start from parent class Pawn
         base.Start();
     }
-    // LIST OF MOVEMENTS FOR TANK PAWN)
+    // LIST OF MOVEMENTS FOR TANK PAWN
     public override void MoveForward()
     {
         mover.Move(transform.forward, moveSpeed);
@@ -33,19 +33,8 @@ public class TankPawn : Pawn
     {
         mover.Rotate(-turnSpeed);
     }
-    // Function for firing tank projectiles
-    //public void FireShell()
-    //{
-    //    GameObject newPawnObj = Instantiate(tankShellPrefab, Vector3.zero, Quaternion.identity) as GameObject;
-    //    void ShotCooldown()
-    //    {
-    //        float cooldownTime = 1.0f;
-    //        float nextShellReady = 1;
-    //        if (Time.time >= nextShellReady)
-    //        {
-    //            nextShellReady = Time.time + cooldownTime;
-    //        }
-    //    }
-    //}
-    //public GameObject tankShellPrefab;
+    public override void Shoot()
+    {
+        shooter.Shoot(shellProjectile, fireForce, damageDone, shellLifespan);
+    }
 }

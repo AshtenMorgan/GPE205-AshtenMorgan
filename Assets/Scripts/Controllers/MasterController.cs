@@ -17,4 +17,9 @@ public abstract class MasterController : MonoBehaviour
     public virtual void Update()
     {
     }
+
+    public virtual void ProcessInputs()
+    {
+
+    }
 }

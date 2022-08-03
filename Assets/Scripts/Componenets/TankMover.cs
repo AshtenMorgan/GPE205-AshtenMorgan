@@ -7,10 +7,9 @@ public class TankMover : Mover
 {
     // instantiates rbody as the rigidbody component
     private Rigidbody rbody;
-    public 
 
     // Start is called before the first frame update
-    override void Start()
+    public override void Start()
     {
         // Gets the rigidbody component so rbody can be referenced for vector movement
         rbody = GetComponent<Rigidbody>();

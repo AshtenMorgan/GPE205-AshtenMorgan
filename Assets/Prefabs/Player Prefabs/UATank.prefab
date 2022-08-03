@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 4552652536077031047}
   - component: {fileID: -3857085819594488584}
   - component: {fileID: 3549922528364082709}
+  - component: {fileID: 6116106564655499013}
   m_Layer: 0
   m_Name: UATank
   m_TagString: Untagged
@@ -34,7 +35,8 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -4.710278, y: 0.02753052, z: -68.99928}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 716006973363327243}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -131,10 +133,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pawn: {fileID: 0}
-  moveForwardKey: 0
-  moveBackwardKey: 0
-  rotateClockwiseKey: 0
-  rotateCounterClockwiseKey: 0
+  moveForwardKey: 119
+  moveBackwardKey: 115
+  rotateClockwiseKey: 100
+  rotateCounterClockwiseKey: 97
+  shootKey: 101
 --- !u!114 &4552652536077031047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,9 +164,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   turnSpeed: 50
-  mover: {fileID: 0}
+  mover: {fileID: 4552652536077031047}
   fireRate: 1
-  tankShellPrefab: {fileID: 0}
+  shooter: {fileID: 0}
+  shellProjectile: {fileID: 3890506353751195604, guid: fe30cf129b1fe9f419743d13e036afca, type: 3}
+  fireForce: 1000
+  damageDone: 25
+  shellLifespan: 1.5
 --- !u!114 &3549922528364082709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,3 +183,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c999ae9d9fd41e44821b63baa60b22c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentHealth: 50
+  maxHealth: 100
+--- !u!114 &6116106564655499013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 725118879205093727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8612d6e6d7d388c45aeb567d78e91152, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firepointTransform: {fileID: 716006973363327243}
+  shellProjectile: {fileID: 3890506353751195604, guid: fe30cf129b1fe9f419743d13e036afca, type: 3}
+--- !u!1 &5464500317017819834
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 716006973363327243}
+  m_Layer: 0
+  m_Name: Fire Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &716006973363327243
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5464500317017819834}
+  m_LocalRotation: {x: -0, y: 0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.606, z: 1.189}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 97939461098351589}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

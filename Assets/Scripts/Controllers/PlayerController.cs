@@ -9,6 +9,7 @@ public class PlayerController : MasterController
     public KeyCode moveBackwardKey;
     public KeyCode rotateClockwiseKey;
     public KeyCode rotateCounterClockwiseKey;
+    public KeyCode shootKey;
 
     // Start is called before the first frame update
     public override void Start()
@@ -29,7 +30,7 @@ public class PlayerController : MasterController
         // Function for processing key inputs
         ProcessInputs();
         // Calls Update() from the parent class MasterController
-        base.Update();
+        // base.Update();
     }
 
     // Function for when this component is destroyed
@@ -44,7 +45,7 @@ public class PlayerController : MasterController
         }
     }
     // Function that processes all movements based on key presses
-    public void ProcessInputs()
+    public override void ProcessInputs()
     {
         if (Input.GetKey(moveForwardKey))
         {
@@ -61,6 +62,10 @@ public class PlayerController : MasterController
         if (Input.GetKey(rotateCounterClockwiseKey))
         {
             pawn.RotateCounterClockwise();
+        }
+        if (Input.GetKeyDown(shootKey))
+        {
+            pawn.Shoot();
         }
     }
 }
