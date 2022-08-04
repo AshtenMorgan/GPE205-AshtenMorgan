@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 8718699161675418207}
   - component: {fileID: 1934611715363952157}
   - component: {fileID: -183408505167533417}
+  - component: {fileID: 1834280174691856409}
   m_Layer: 0
   m_Name: EnemyTank
   m_TagString: Untagged
@@ -170,6 +171,7 @@ MonoBehaviour:
   shellLifespan: 3
   target: {fileID: 0}
   pawn: {fileID: 0}
+  noiseMaker: {fileID: 0}
   shotCooldown: 1
 --- !u!114 &-183408505167533417
 MonoBehaviour:
@@ -183,6 +185,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0294cbbd281d914f991537c139b20d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1834280174691856409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4956322752234019913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63133b8103ec7b646990462d3f08dcb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeDistance: 0
 --- !u!1 &6631575204561220821
 GameObject:
   m_ObjectHideFlags: 0

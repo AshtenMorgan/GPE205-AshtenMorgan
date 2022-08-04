@@ -22,7 +22,6 @@ public class Health : MonoBehaviour
     public void TakeDamage(float damageAmount, Pawn damageSource)
     {
         currentHealth = currentHealth - damageAmount;
-        Debug.Log(damageSource.name + " did " + damageAmount + " damage to " + gameObject.name);
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         if (currentHealth <= 0)
         {

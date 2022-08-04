@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: -3857085819594488584}
   - component: {fileID: 3549922528364082709}
   - component: {fileID: 6116106564655499013}
+  - component: {fileID: 8176470608221504961}
   m_Layer: 0
   m_Name: UATank
   m_TagString: Untagged
@@ -154,6 +155,7 @@ MonoBehaviour:
   shellLifespan: 3
   target: {fileID: 0}
   pawn: {fileID: 0}
+  noiseMaker: {fileID: 0}
   shotCooldown: 0.1
 --- !u!114 &3549922528364082709
 MonoBehaviour:
@@ -183,6 +185,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firepointTransform: {fileID: 716006973363327243}
   shellProjectile: {fileID: 3890506353751195604, guid: fe30cf129b1fe9f419743d13e036afca, type: 3}
+--- !u!114 &8176470608221504961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 725118879205093727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63133b8103ec7b646990462d3f08dcb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeDistance: 0
 --- !u!1 &5464500317017819834
 GameObject:
   m_ObjectHideFlags: 0

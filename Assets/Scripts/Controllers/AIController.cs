@@ -5,11 +5,12 @@ using UnityEngine;
 public class AIController : MasterController
 {
     public GameObject target;
-    public enum AIStates {Idle, Chase, Attack, Flee, Patrol};
+    public enum AIStates {Idle, Chase, Attack, Flee, Patrol, ChooseTarget};
     public AIStates currentState;
     public float fleeDistance;
     public Transform[] waypoints;
     public float waypointStopDistance;
+    public float hearingDistance;
     public bool isTankPatroller;
     public bool canPatrolLoop;
     private float lastStateChangeTime;
@@ -32,6 +33,10 @@ public class AIController : MasterController
     {
         base.Update();
         MakeDecisions();
+        if (CanHear(target) == true)
+        {
+            Debug.Log("The enemy heard that!");
+        }
     }
     // Function for switching states
     public void MakeDecisions()
@@ -56,6 +61,10 @@ public class AIController : MasterController
                 break;
             case AIStates.Chase: // If AIStates is set to Chase
                 DoChaseState(); // Call DoChaseState function, which makes the pawn seek a target
+                if (IsHasTarget() == false)
+                {
+                    ChangeState(AIStates.ChooseTarget);
+                }
                 if (!IsDistanceLessThan(target, 16)) // if distance isn't less than float distance from target
                 {
                     ChangeState(AIStates.Idle); // change state to Idle
@@ -67,6 +76,10 @@ public class AIController : MasterController
                 break;
             case AIStates.Attack:
                 DoAttackState();
+                if (IsHasTarget() == false)
+                {
+                    ChangeState(AIStates.ChooseTarget);
+                }
                 if (!IsDistanceLessThan(target, 10))
                 {
                     Debug.Log("Distance is greater than 10!");
@@ -86,9 +99,20 @@ public class AIController : MasterController
             //    break;
             case AIStates.Patrol:                
                 Patrol();
+                if (IsHasTarget() == false)
+                {
+                    ChangeState(AIStates.ChooseTarget);
+                }
                 if (IsDistanceLessThan(target, 12))
                 {
                     ChangeState(AIStates.Chase);
+                }
+                break;
+            case AIStates.ChooseTarget:
+                TargetPlayerOne();
+                if (IsHasTarget() == true)
+                {
+                    ChangeState(AIStates.Idle);
                 }
                 break;
         }
@@ -152,6 +176,63 @@ public class AIController : MasterController
                 RestartPatrol();
             }
         }
+    }
+
+    public void TargetPlayerOne()
+    {
+        if (GameManager.instance != null)
+        {
+            if (GameManager.instance.players != null)
+            {
+                if (GameManager.instance.players.Count > 0)
+                {
+                    target = GameManager.instance.players[0].pawn.gameObject;
+                }
+            }
+        }
+    }
+    protected void TargetNearestTank()
+    {
+        Debug.Log("Targeting the nearest Tank now!");
+        Pawn[] allTanks = FindObjectsOfType<Pawn>();
+        Pawn closestTank = allTanks[0];
+        float closestTankDistance = Vector3.Distance(pawn.transform.position, closestTank.transform.position);
+
+        foreach (Pawn tank in allTanks)
+        {
+            if (Vector3.Distance(pawn.transform.position, tank.transform.position) <= closestTankDistance)
+            {
+                closestTank = tank;
+                closestTankDistance = Vector3.Distance(pawn.transform.position, closestTank.transform.position);
+            }
+        }
+        target = closestTank.gameObject;
+    }
+    public bool CanHear(GameObject target)
+    {
+        NoiseMaker noiseMaker = target.GetComponent<NoiseMaker>();
+        if (noiseMaker == null)
+        {
+            return false;
+        }
+        if (noiseMaker.volumeDistance <= 0)
+        {
+            return false;
+        }
+        float totalDistance = noiseMaker.volumeDistance + hearingDistance;
+        if (Vector3.Distance(pawn.transform.position, target.transform.position) <= totalDistance)
+        {
+            Debug.Log("The Enemy heard that!");
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    protected bool IsHasTarget()
+    {
+        return (target != null);
     }
     protected void RestartPatrol()
     {

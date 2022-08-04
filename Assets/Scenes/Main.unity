@@ -192,6 +192,10 @@ PrefabInstance:
       propertyPath: firepointTransform
       value: 
       objectReference: {fileID: 1845451934}
+    - target: {fileID: 1834280174691856409, guid: d300b26fb394b35418134dc71a225135, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1934611715363952157, guid: d300b26fb394b35418134dc71a225135, type: 3}
       propertyPath: shooter
       value: 
@@ -202,6 +206,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1934611715363952157, guid: d300b26fb394b35418134dc71a225135, type: 3}
       propertyPath: damageDone
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1934611715363952157, guid: d300b26fb394b35418134dc71a225135, type: 3}
+      propertyPath: shotCooldown
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4956322752234019913, guid: d300b26fb394b35418134dc71a225135, type: 3}
@@ -214,7 +222,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5729623142165907187, guid: d300b26fb394b35418134dc71a225135, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5729623142165907187, guid: d300b26fb394b35418134dc71a225135, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3373,11 +3381,11 @@ PrefabInstance:
       objectReference: {fileID: 561179687}
     - target: {fileID: 7868778047578070707, guid: aa773283d8cf0164683ce3f8b0555d94, type: 3}
       propertyPath: canPatrolLoop
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7868778047578070707, guid: aa773283d8cf0164683ce3f8b0555d94, type: 3}
       propertyPath: isTankPatroller
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7868778047578070707, guid: aa773283d8cf0164683ce3f8b0555d94, type: 3}
       propertyPath: waypointStopDistance
@@ -3405,7 +3413,7 @@ PrefabInstance:
       objectReference: {fileID: 1837610148}
     - target: {fileID: 7868778047578070708, guid: aa773283d8cf0164683ce3f8b0555d94, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7868778047578070708, guid: aa773283d8cf0164683ce3f8b0555d94, type: 3}
       propertyPath: m_LocalPosition.x
