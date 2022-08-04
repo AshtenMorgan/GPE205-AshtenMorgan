@@ -19,40 +19,22 @@ public class TankPawn : Pawn
         nextShotDelay -= Time.deltaTime;
         nextShotDelay = Mathf.Clamp(nextShotDelay, 0, shotCooldown);
     }
-    public bool IsMakingNoise(GameObject pawn)
-    {
-        NoiseMaker noiseMaker = pawn.GetComponent<NoiseMaker>();
-        if (noiseMaker.volumeDistance > 0)
-        {
-            Debug.Log("You're noisy!");
-            return true;
-        }
-        else
-        {
-            noiseMaker.volumeDistance = 0;
-            return false;
-        }
-    }
     // LIST OF ACTIONS FOR TANK PAWN
     public override void MoveForward()
     {
         mover.Move(transform.forward, moveSpeed);
-        noiseMaker.volumeDistance = 16;
     }
     public override void MoveBackward()
     {
         mover.Move(transform.forward, -moveSpeed);
-        noiseMaker.volumeDistance = 16;
     }
     public override void RotateClockwise()
     {
         mover.Rotate(turnSpeed);
-        noiseMaker.volumeDistance = 16;
     }
     public override void RotateCounterClockwise()
     {
         mover.Rotate(-turnSpeed);
-        noiseMaker.volumeDistance = 16;
     }
     public override void RotateTowards(Vector3 targetPosition)
     {
@@ -67,7 +49,6 @@ public class TankPawn : Pawn
         if (nextShotDelay <= 0)
         {
             shooter.Shoot(shellProjectile, fireForce, damageDone, shellLifespan);
-            noiseMaker.volumeDistance = 50;
             nextShotDelay = shotCooldown;
         }
         else if (nextShotDelay > 0)

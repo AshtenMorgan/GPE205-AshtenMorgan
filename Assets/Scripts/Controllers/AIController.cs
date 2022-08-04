@@ -21,11 +21,6 @@ public class AIController : MasterController
     {
         base.Start();
         ChangeState(AIStates.Idle);
-        
-        //var currentHealthRef = new Health();
-        //currentHealthRef.currentHealth = 100;
-        //currHealth = currentHealthRef.currentHealth;
-        
     }
 
     // Update is called once per frame
@@ -33,10 +28,7 @@ public class AIController : MasterController
     {
         base.Update();
         MakeDecisions();
-        if (CanHear(target) == true)
-        {
-            Debug.Log("The enemy heard that!");
-        }
+
     }
     // Function for switching states
     public void MakeDecisions()
@@ -46,7 +38,11 @@ public class AIController : MasterController
         {
             case AIStates.Idle: // If AIStates is set to Idle
                 DoIdleState(); // Call DoIdleState function, which makes the player remain still
-                if (IsDistanceLessThan(target, 16)) // if distance is less than 5 meters from target
+                if (IsHasTarget() == false)
+                {
+                    ChangeState(AIStates.ChooseTarget);
+                }
+                if (IsDistanceLessThan(target, 16)) // if distance is less than distance from target
                 {
                     ChangeState(AIStates.Chase); // change state to Chase
                 }
