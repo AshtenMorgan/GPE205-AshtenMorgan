@@ -22,6 +22,10 @@ public abstract class Pawn : MonoBehaviour
     public float damageDone;
     // how long the shell exists if it doesn't collide with anything
     public float shellLifespan;
+    // target object for the Seeking behavior
+    public GameObject target;
+    // pawn to move towards for AI
+    public Pawn pawn;
 
     // Start is called before the first frame update
     public virtual void Start()
@@ -42,6 +46,6 @@ public abstract class Pawn : MonoBehaviour
     public abstract void RotateClockwise();
     public abstract void RotateCounterClockwise();
     public abstract void Shoot();
-    public abstract void Boost();
+    public abstract void RotateTowards(Vector3 targetPosition);
 };
 

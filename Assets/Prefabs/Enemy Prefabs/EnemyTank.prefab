@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 356271063579041174}
   - component: {fileID: -118829108036451851}
   - component: {fileID: 8718699161675418207}
+  - component: {fileID: 1934611715363952157}
+  - component: {fileID: -183408505167533417}
   m_Layer: 0
   m_Name: EnemyTank
   m_TagString: Untagged
@@ -32,7 +34,8 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -9.146789, y: 0.027529566, z: -0.44381428}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 2664604353378442315}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -128,7 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8612d6e6d7d388c45aeb567d78e91152, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firepointTransform: {fileID: 0}
+  firepointTransform: {fileID: 2664604353378442315}
   shellProjectile: {fileID: 3890506353751195604, guid: fe30cf129b1fe9f419743d13e036afca, type: 3}
 --- !u!114 &8718699161675418207
 MonoBehaviour:
@@ -144,3 +147,69 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 100
   maxHealth: 100
+--- !u!114 &1934611715363952157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4956322752234019913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ad64d6ae8dd4d94baced242b22ec91b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 4
+  turnSpeed: 100
+  mover: {fileID: -183408505167533417}
+  fireRate: 1
+  shooter: {fileID: -118829108036451851}
+  shellProjectile: {fileID: 3890506353751195604, guid: fe30cf129b1fe9f419743d13e036afca, type: 3}
+  fireForce: 1500
+  damageDone: 25
+  shellLifespan: 3
+  target: {fileID: 0}
+  pawn: {fileID: 0}
+  shotCooldown: 1
+--- !u!114 &-183408505167533417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4956322752234019913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0294cbbd281d914f991537c139b20d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &6631575204561220821
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2664604353378442315}
+  m_Layer: 0
+  m_Name: Fire Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2664604353378442315
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6631575204561220821}
+  m_LocalRotation: {x: -0, y: 0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.6, z: 1.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5729623142165907187}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

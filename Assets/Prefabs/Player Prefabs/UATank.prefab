@@ -146,13 +146,15 @@ MonoBehaviour:
   moveSpeed: 5
   turnSpeed: 100
   mover: {fileID: 4552652536077031047}
-  fireRate: 0.1
+  fireRate: 1
   shooter: {fileID: 0}
   shellProjectile: {fileID: 3890506353751195604, guid: fe30cf129b1fe9f419743d13e036afca, type: 3}
   fireForce: 1500
   damageDone: 25
   shellLifespan: 3
-  shotCooldown: 1
+  target: {fileID: 0}
+  pawn: {fileID: 0}
+  shotCooldown: 0.1
 --- !u!114 &3549922528364082709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c999ae9d9fd41e44821b63baa60b22c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 50
+  currentHealth: 100
   maxHealth: 100
 --- !u!114 &6116106564655499013
 MonoBehaviour:
@@ -205,7 +207,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5464500317017819834}
   m_LocalRotation: {x: -0, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.606, z: 1.189}
+  m_LocalPosition: {x: 0, y: 0.6, z: 1.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 97939461098351589}

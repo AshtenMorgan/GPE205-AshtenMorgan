@@ -19,7 +19,7 @@ public class TankPawn : Pawn
         nextShotDelay -= Time.deltaTime;
         nextShotDelay = Mathf.Clamp(nextShotDelay, 0, shotCooldown);
     }
-    // LIST OF MOVEMENTS FOR TANK PAWN
+    // LIST OF ACTIONS FOR TANK PAWN
     public override void MoveForward()
     {
         mover.Move(transform.forward, moveSpeed);
@@ -36,10 +36,13 @@ public class TankPawn : Pawn
     {
         mover.Rotate(-turnSpeed);
     }
-    public override void Boost()
+    public override void RotateTowards(Vector3 targetPosition)
     {
-        mover.Move(transform.forward, moveSpeed * 2);
+        Vector3 vectorToTarget = targetPosition - transform.position;
+        Quaternion targetRotation = Quaternion.LookRotation(vectorToTarget, Vector3.up);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
     }
+
     public float shotCooldown = 1.0f;
     private float nextShotDelay;
     public override void Shoot()
