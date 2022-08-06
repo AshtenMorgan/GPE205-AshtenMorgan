@@ -3381,11 +3381,11 @@ PrefabInstance:
       objectReference: {fileID: 561179687}
     - target: {fileID: 7868778047578070707, guid: aa773283d8cf0164683ce3f8b0555d94, type: 3}
       propertyPath: canPatrolLoop
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7868778047578070707, guid: aa773283d8cf0164683ce3f8b0555d94, type: 3}
       propertyPath: isTankPatroller
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7868778047578070707, guid: aa773283d8cf0164683ce3f8b0555d94, type: 3}
       propertyPath: waypointStopDistance

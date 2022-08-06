@@ -18,6 +18,7 @@ public class TankMover : Mover
     // function that calcuates vectors for rigidbody as the tank moves
     public override void Move(Vector3 direction, float speed)
     {
+        MakeNoise(15);
         // moveVector that uses Time instead of Update() so that movement is independent of framerate
         Vector3 moveVector = direction.normalized * speed * Time.deltaTime;
 
@@ -26,10 +27,19 @@ public class TankMover : Mover
     }
     public override void Rotate(float turnSpeed)
     {
+        MakeNoise(15);
         // creates float that calculates vectors for rotation based on time instead of framerate
         float rotationVector = turnSpeed * Time.deltaTime;
         // applies transform on the Y axis of rotation based on float
         transform.Rotate(0, rotationVector, 0);
     }
-
+    public override void MakeNoise(float moveVolume)
+    {
+        NoiseMaker noiseMaker = gameObject.GetComponent<NoiseMaker>();
+        noiseMaker.volumeDistance = moveVolume;
+        if (noiseMaker.volumeDistance > 0)
+        {
+            noiseMaker.volumeDistance = 0;
+        }
+    }
 }

@@ -9,4 +9,5 @@ public abstract class Shooter : MonoBehaviour
     // Update is called once per frame
     public abstract void Update();
     public abstract void Shoot(GameObject shellProjectile, float fireForce, float damageDone, float lifespan);
+    public abstract void MakeNoise(float shootVolume);
 }

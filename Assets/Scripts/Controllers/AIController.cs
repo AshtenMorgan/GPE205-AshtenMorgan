@@ -9,6 +9,7 @@ public class AIController : MasterController
     public AIStates currentState;
     public float fleeDistance;
     public Transform[] waypoints;
+    public Health health;
     public float waypointStopDistance;
     public float hearingDistance;
     public bool isTankPatroller;
@@ -31,8 +32,9 @@ public class AIController : MasterController
 
     }
     // Function for switching states
-    public void MakeDecisions()
+    public virtual void MakeDecisions()
     {
+        Health health = pawn.GetComponent<Health>();
         // change current state (AIStates...Idle,Chase,Flee,Patrol,Seek)
         switch (currentState)
         {
@@ -50,10 +52,11 @@ public class AIController : MasterController
                 {
                     ChangeState(AIStates.Patrol);
                 }
-                //else if (currentHealth <= maxHealth/2) // if health is less than half of max health
-                //{
-                //    ChangeState(AIStates.Flee); // change state to Flee
-                //}
+                else if (health.currentHealth <= health.maxHealth/2) // if health is less than half of max health
+                {
+                    Debug.Log(health.currentHealth);
+                    ChangeState(AIStates.Flee); // change state to Flee
+                }
                 break;
             case AIStates.Chase: // If AIStates is set to Chase
                 DoChaseState(); // Call DoChaseState function, which makes the pawn seek a target
@@ -69,6 +72,11 @@ public class AIController : MasterController
                 {
                     ChangeState(AIStates.Attack);
                 }
+                else if (health.currentHealth <= health.maxHealth / 2) // if health is less than half of max health
+                {
+                    Debug.Log(health.currentHealth);
+                    ChangeState(AIStates.Flee); // change state to Flee
+                }
                 break;
             case AIStates.Attack:
                 DoAttackState();
@@ -81,18 +89,23 @@ public class AIController : MasterController
                     Debug.Log("Distance is greater than 10!");
                     ChangeState(AIStates.Chase);
                 }
+                else if (health.currentHealth <= health.maxHealth / 2) // if health is less than half of max health
+                {
+                    Debug.Log(health.currentHealth);
+                    ChangeState(AIStates.Flee); // change state to Flee
+                }
                 break;
-            //case AIStates.Flee: // COME BACK TO FIX
-            //    Flee();
-            //    if (IsDistanceLessThan(target, 16)) // if health is less than ...
-            //    {
-            //        ChangeState(AIStates.Chase); // change state to Flee
-            //    }
-            //    else if (!IsDistanceLessThan(target, 10))
-            //    {
-            //        ChangeState(AIStates.Attack);
-            //    }
-            //    break;
+            case AIStates.Flee:
+                Flee();
+                if (health.currentHealth > health.maxHealth)
+                {
+                    ChangeState(AIStates.Idle);
+                }
+                else if (health.currentHealth <= health.maxHealth / 2) // if health is less than half of max health
+                {
+                    ChangeState(AIStates.Flee); // change state to Flee
+                }
+                break;
             case AIStates.Patrol:                
                 Patrol();
                 if (IsHasTarget() == false)
@@ -102,6 +115,11 @@ public class AIController : MasterController
                 if (IsDistanceLessThan(target, 12))
                 {
                     ChangeState(AIStates.Chase);
+                }
+                else if (health.currentHealth <= health.maxHealth / 2) // if health is less than half of max health
+                {
+                    Debug.Log(health.currentHealth);
+                    ChangeState(AIStates.Flee); // change state to Flee
                 }
                 break;
             case AIStates.ChooseTarget:
@@ -130,20 +148,20 @@ public class AIController : MasterController
         currentState = newState; // newstate is passed in when the function is called and currentState is assigned the value of the state that was passed in ( Example: ChangeState(AIStates.Chase) )
         lastStateChangeTime = Time.time; // tracks time that state was changed last. Time starts counting every time ChangeState() is called
     }
-    protected virtual void DoChaseState() // function for the Chase behavior
+    public virtual void DoChaseState() // function for the Chase behavior
     {
         Seek(target);
     }
-    protected virtual void DoIdleState() // function for making the pawn Idle
+    public virtual void DoIdleState() // function for making the pawn Idle
     {
         // Remain still
     }
-    protected virtual void DoAttackState() // function to perform actions associated with the Attack behavior
+    public virtual void DoAttackState() // function to perform actions associated with the Attack behavior
     {
         Seek(target);
         Shoot();
     }
-    protected virtual void Flee() // COME BACK TO FIX
+    public virtual void Flee()
     {
         Vector3 vectorToTarget = target.transform.position - pawn.transform.position;
         Vector3 vectorAwayFromTarget = -vectorToTarget;
@@ -153,9 +171,8 @@ public class AIController : MasterController
         percentOfFleeDistance = Mathf.Clamp01(percentOfFleeDistance);
         float flippedPercentOfFleeDistance = 1 - percentOfFleeDistance;
         Seek(pawn.transform.position + fleeVector);
-
     }
-    protected void Patrol() // Function for the Patrol behavior
+    public void Patrol() // Function for the Patrol behavior
     {
         if (waypoints.Length > currentWaypoint) // if the number (Length) of waypoints is greater than currentWaypoint. Checks if we have enough waypoints to move to a currentWaypoint
         {
@@ -187,7 +204,7 @@ public class AIController : MasterController
             }
         }
     }
-    protected void TargetNearestTank()
+    public void TargetNearestTank()
     {
         Debug.Log("Targeting the nearest Tank now!");
         Pawn[] allTanks = FindObjectsOfType<Pawn>();
@@ -226,11 +243,11 @@ public class AIController : MasterController
             return false;
         }
     }
-    protected bool IsHasTarget()
+    public bool IsHasTarget()
     {
         return (target != null);
     }
-    protected void RestartPatrol()
+    public void RestartPatrol()
     {
         currentWaypoint = 0; // set currentWaypoint back to 0, thereby creating a loop for the Patrol behavior
     }

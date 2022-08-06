@@ -42,6 +42,7 @@ public class TankPawn : Pawn
         Quaternion targetRotation = Quaternion.LookRotation(vectorToTarget, Vector3.up);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
     }
+
     public float shotCooldown = 1.0f;
     private float nextShotDelay;
     public override void Shoot()
