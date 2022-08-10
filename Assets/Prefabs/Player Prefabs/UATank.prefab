@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 3549922528364082709}
   - component: {fileID: 6116106564655499013}
   - component: {fileID: 8176470608221504961}
+  - component: {fileID: -8578263996400846896}
   m_Layer: 0
   m_Name: UATank
   m_TagString: Untagged
@@ -155,8 +156,7 @@ MonoBehaviour:
   shellLifespan: 3
   target: {fileID: 0}
   pawn: {fileID: 0}
-  noiseMaker: {fileID: 0}
-  shotCooldown: 0.1
+  shotCooldown: 1
 --- !u!114 &3549922528364082709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,7 +170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 100
-  maxHealth: 100
+  maxHealth: 150
 --- !u!114 &6116106564655499013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,6 +198,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   volumeDistance: 0
+--- !u!114 &-8578263996400846896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 725118879205093727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd70e7739c441eb4b81acff789837885, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickupPrefab: {fileID: 0}
+  spawnDelay: 0
 --- !u!1 &5464500317017819834
 GameObject:
   m_ObjectHideFlags: 0
