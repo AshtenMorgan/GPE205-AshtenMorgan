@@ -27,6 +27,7 @@ public abstract class Pawn : MonoBehaviour
     // pawn to move towards for AI
     public Pawn pawn;
     // Noisemaker for Pawn
+    public NoiseMaker noise;
 
     // Start is called before the first frame update
     public virtual void Start()

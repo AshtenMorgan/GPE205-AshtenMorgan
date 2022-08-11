@@ -8,6 +8,10 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     // Instantiates List of all players
     public List<PlayerController> players;
+    public List<AIController> enemies;
+    public List<EnemySpawnPoint> enemySpawnPoints;
+    public Transform playerSpawnPoint;
+    public int numberOfEnemies;
     // Function calls even before Start()
     private void Awake()
     {
@@ -31,6 +35,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         SpawnPlayer();
+        SpawnEnemies();
     }
 
     // Update is called once per frame
@@ -42,13 +47,31 @@ public class GameManager : MonoBehaviour
     public void SpawnPlayer()
     {
         GameObject newPlayerObj = Instantiate(playerControllerPrefab, Vector3.zero, Quaternion.identity) as GameObject;
-        GameObject newPawnObj = Instantiate(tankPawnPrefab, Vector3.zero, Quaternion.identity) as GameObject;
+        GameObject newPawnObj = Instantiate(tankPawnPrefab, playerSpawnPoint.position, Quaternion.identity) as GameObject;
         MasterController newController = newPlayerObj.GetComponent<MasterController>();
         Pawn newPawn = newPawnObj.GetComponent<Pawn>();
         newController.pawn = newPawn;
     }
+    public void SpawnEnemies()
+    {
+        EnemySpawnPoint[] enemySpawnPoints = new EnemySpawnPoint[numberOfEnemies]; // Initializes List of Enemy Spawn Points "called enemySpawnPoints" with a length based on the number of Enemies
+        for (int currentEnemy = 0; currentEnemy < numberOfEnemies; currentEnemy++) // For loop for instantiating enemies until the numberofEnemies has been reached
+        {
+            EnemySpawnPoint enemySpawnPoint = enemySpawnPoints[currentEnemy]; // For this loop, the Spawn Point is for the enemy with the index of "currentEnemy", starting at 0 and ending at currentEnemy 
+            enemyPawnPrefab = enemySpawnPoint.EnemyPrefab; // the enemyPawnPrefab game object, for this loop, is set to the Enemy Prefab for the current enemySpawnPoint.
+
+            GameObject newAIControllerObj = Instantiate(aiControllerPrefab, Vector3.zero, Quaternion.identity) as GameObject; // Instantiate AI Controller for this enemy
+            GameObject newEnemyPawnObj = Instantiate(enemyPawnPrefab, enemySpawnPoint.position, Quaternion.identity) as GameObject;
+
+            MasterController newController = newAIControllerObj.GetComponent<MasterController>();
+            Pawn newPawn = newEnemyPawnObj.GetComponent<Pawn>();
+            newController.pawn = newPawn;
+        }
+    }
 
     //Prefabs
     public GameObject playerControllerPrefab;
+    public GameObject aiControllerPrefab;
+    public GameObject enemyPawnPrefab;
     public GameObject tankPawnPrefab;
 }

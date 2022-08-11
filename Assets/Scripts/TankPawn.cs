@@ -18,11 +18,17 @@ public class TankPawn : Pawn
         base.Start();
         nextShotDelay -= Time.deltaTime;
         nextShotDelay = Mathf.Clamp(nextShotDelay, 0, shotCooldown);
+        if (noise.volumeDistance > 0)
+        {
+            Debug.Log("Making noise!");
+            noise.volumeDistance -= Time.deltaTime;
+        }
     }
     // LIST OF ACTIONS FOR TANK PAWN
     public override void MoveForward()
     {
         mover.Move(transform.forward, moveSpeed);
+        noise.MakeNoise(15);
     }
     public override void MoveBackward()
     {

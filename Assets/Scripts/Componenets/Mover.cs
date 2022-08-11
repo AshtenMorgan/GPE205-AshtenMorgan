@@ -10,5 +10,4 @@ public abstract class Mover : MonoBehaviour
     public abstract void Move(Vector3 direction, float speed);
     // Rotate function with a float for rotational speed. Can be inherited by other scripts to create different styles of rotation
     public abstract void Rotate(float turnSpeed);
-    public abstract void MakeNoise(float moveVolume);
 }

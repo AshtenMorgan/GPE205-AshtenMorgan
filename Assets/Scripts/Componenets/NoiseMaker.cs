@@ -16,4 +16,8 @@ public class NoiseMaker : MonoBehaviour
     {
         
     }
+    public void MakeNoise(float volume)
+    {
+        volumeDistance = volume;
+    }
 }
