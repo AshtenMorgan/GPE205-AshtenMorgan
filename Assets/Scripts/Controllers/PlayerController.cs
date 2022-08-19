@@ -11,9 +11,12 @@ public class PlayerController : MasterController
     public KeyCode rotateCounterClockwiseKey;
     public KeyCode shootKey;
 
+    public int PlayerScore;
+
     // Start is called before the first frame update
     public override void Start()
     {
+        PlayerScore = 0;
         // If an instance of the GameManger exists
         if (GameManager.instance != null)
             // and if instances of players exist
@@ -67,5 +70,10 @@ public class PlayerController : MasterController
         {
             pawn.Shoot();
         }
+    }
+
+    public void AddToScore()
+    {
+        PlayerScore = PlayerScore + 10;
     }
 }

@@ -20,8 +20,7 @@ public class TankPawn : Pawn
         nextShotDelay = Mathf.Clamp(nextShotDelay, 0, shotCooldown);
         if (noise.volumeDistance > 0)
         {
-            Debug.Log("Making noise!");
-            noise.volumeDistance -= Time.deltaTime;
+            noise.volumeDistance--;
         }
     }
     // LIST OF ACTIONS FOR TANK PAWN

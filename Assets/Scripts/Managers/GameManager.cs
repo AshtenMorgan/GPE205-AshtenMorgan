@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     // Instantiates List of all players
     public List<PlayerController> players;
     public List<AIController> enemies;
-    public List<EnemySpawnPoint> enemySpawnPoints;
+    public List<EnemySpawnPoint> enemySpawnPoints; // The number of items on this list and the numberOfEnemies should generally be the same
     public Transform playerSpawnPoint;
     public int numberOfEnemies;
     // Function calls even before Start()
@@ -52,21 +52,61 @@ public class GameManager : MonoBehaviour
         Pawn newPawn = newPawnObj.GetComponent<Pawn>();
         newController.pawn = newPawn;
     }
-    public void SpawnEnemies()
-    {
-        EnemySpawnPoint[] enemySpawnPoints = new EnemySpawnPoint[numberOfEnemies]; // Initializes List of Enemy Spawn Points "called enemySpawnPoints" with a length based on the number of Enemies
+    public void SpawnEnemies() // Function reads the list of Spawn Points and spawns an enemy at each point, stopping at the determined numberOfEnemies, even if more points exist
+    { 
+        EnemySpawnPoint[] tempSpawnPoint = new EnemySpawnPoint[numberOfEnemies]; // Initializes List of Enemy Spawn Points "called enemySpawnPoints" with a length based on the number of Enemies
+
         for (int currentEnemy = 0; currentEnemy < numberOfEnemies; currentEnemy++) // For loop for instantiating enemies until the numberofEnemies has been reached
         {
-            EnemySpawnPoint enemySpawnPoint = enemySpawnPoints[currentEnemy]; // For this loop, the Spawn Point is for the enemy with the index of "currentEnemy", starting at 0 and ending at currentEnemy 
-            enemyPawnPrefab = enemySpawnPoint.EnemyPrefab; // the enemyPawnPrefab game object, for this loop, is set to the Enemy Prefab for the current enemySpawnPoint.
+            tempSpawnPoint[currentEnemy] = enemySpawnPoints[currentEnemy]; // tells tempSpawnPoint that it is currently looking at the index equivalent to the index of enemySpawnPoints.
+                                                                           // Index (based on currentEnemy) increments each loop to spawn an enemy on the next spawn point on the enemySpawnPoints list.
 
             GameObject newAIControllerObj = Instantiate(aiControllerPrefab, Vector3.zero, Quaternion.identity) as GameObject; // Instantiate AI Controller for this enemy
-            GameObject newEnemyPawnObj = Instantiate(enemyPawnPrefab, enemySpawnPoint.position, Quaternion.identity) as GameObject;
+            GameObject newEnemyPawnObj = Instantiate(enemyPawnPrefab, tempSpawnPoint[currentEnemy].transform.position, Quaternion.identity) as GameObject; // Instantiate enemy pawn at the position of the current tempSpawnPoint
 
-            MasterController newController = newAIControllerObj.GetComponent<MasterController>();
-            Pawn newPawn = newEnemyPawnObj.GetComponent<Pawn>();
-            newController.pawn = newPawn;
+            MasterController newController = newAIControllerObj.GetComponent<MasterController>(); // Gets the MasterController from the instantiated AI Controller
+            Pawn newPawn = newEnemyPawnObj.GetComponent<Pawn>(); // gets the pawn from the instantiated enemy Pawn object
+            newController.pawn = newPawn; // sets the pawn on the AI Controller (newController) to newPawn, which is the Pawn from the instantiated enemy pawn GameObject
         }
+    }
+    public void DeactivateAllStates() // Function for deactivating all game states
+    {
+        TitleScreenStateObject.SetActive(false);
+        MainMenuStateObject.SetActive(false);
+        OptionsScreenStateObject.SetActive(false);
+        CreditsScreenStateObject.SetActive(false);
+        GameplayStateObject.SetActive(false);
+        GameOverScreenStateObject.SetActive(false);
+    }
+    public void ActivateTitleScreen()
+    {
+        DeactivateAllStates(); // Deactivates all states
+        TitleScreenStateObject.SetActive(true); // Activates the Title Screen State Object
+    }
+    public void ActivateMainMenu()
+    {
+        DeactivateAllStates(); // Deactivates all states
+        MainMenuStateObject.SetActive(true); // Activates the Title Screen State Object
+    }
+    public void ActivateOptionsScreen()
+    {
+        DeactivateAllStates(); // Deactivates all states
+        OptionsScreenStateObject.SetActive(true); // Activates the Title Screen State Object
+    }
+    public void ActivateCreditsScreen()
+    {
+        DeactivateAllStates(); // Deactivates all states
+        CreditsScreenStateObject.SetActive(true); // Activates the Title Screen State Object
+    }
+    public void ActivateGameplayState()
+    {
+        DeactivateAllStates(); // Deactivates all states
+        GameplayStateObject.SetActive(true); // Activates the Title Screen State Object
+    }
+    public void ActivateGameOverScreen()
+    {
+        DeactivateAllStates(); // Deactivates all states
+        GameOverScreenStateObject.SetActive(true); // Activates the Title Screen State Object
     }
 
     //Prefabs
@@ -74,4 +114,12 @@ public class GameManager : MonoBehaviour
     public GameObject aiControllerPrefab;
     public GameObject enemyPawnPrefab;
     public GameObject tankPawnPrefab;
+
+    // Game State Objects
+    public GameObject TitleScreenStateObject;
+    public GameObject MainMenuStateObject;
+    public GameObject OptionsScreenStateObject;
+    public GameObject CreditsScreenStateObject;
+    public GameObject GameplayStateObject;
+    public GameObject GameOverScreenStateObject;
 }
